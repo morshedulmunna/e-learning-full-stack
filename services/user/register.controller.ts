@@ -1,8 +1,8 @@
 import {NextFunction, Request, Response} from "express";
+import {createActivationToken} from "../../helpers/generateActivationTokenCode";
 import {catchAsyncHandler} from "../../middleware/catchAsyncHandler";
 import {iRegistrationBody} from "../../types/user.type";
 import ErrorHandler from "../../utils/ErrorHandler";
-import {createActivationToken} from "../../utils/generateActivationTokenCode";
 import sendMail from "../../utils/sendMail";
 import userModel from "./user.model";
 
