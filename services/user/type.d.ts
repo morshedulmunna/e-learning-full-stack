@@ -9,3 +9,8 @@ export interface iActivationToken {
     token: string;
     activationCode: string;
 }
+
+export interface iActivationRequest {
+    activation_token: string;
+    activation_code: string;
+}
