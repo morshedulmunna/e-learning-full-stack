@@ -3,6 +3,7 @@ import mongoose, {Document, Model, Schema} from "mongoose";
 
 const emailRegexPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// user interface
 export interface iUser extends Document {
     name: string;
     email: string;
@@ -17,6 +18,7 @@ export interface iUser extends Document {
     comparePassword: (password: string) => Promise<boolean>;
 }
 
+// User Schema
 const userSchema: Schema<iUser> = new mongoose.Schema(
     {
         name: {
@@ -70,6 +72,7 @@ userSchema.pre<iUser>("save", async function (next) {
     next();
 });
 
+//compare  password
 userSchema.methods.comparePassword = async function (enterPassword: string) {
     return await this.password.compare(enterPassword, this.password);
 };
