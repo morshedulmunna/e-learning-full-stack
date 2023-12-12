@@ -10,16 +10,16 @@ export const notFoundHandler = (
     next(error);
 };
 
-export const errorHandler = (
-    error: any,
-    _req: Request,
-    res: Response,
-    _next: NextFunction
-) => {
-    if (error.status) {
-        return res.status(error.status).json({
-            message: error.message,
-        });
-    }
-    res.status(500).json({message: "Something went Wrong"});
-};
+// export const errorHandler = (
+//     error: any,
+//     _req: Request,
+//     res: Response,
+//     _next: NextFunction
+// ) => {
+//     if (error.status) {
+//         return res.status(error.status).json({
+//             message: error.message,
+//         });
+//     }
+//     res.status(500).json({message: "Something went Wrong"});
+// };
