@@ -1,8 +1,8 @@
 import {NextFunction, Request, Response} from "express";
 import {CatchAsyncError} from "../../middleware/catchAsyncErrors";
 import ErrorHandler from "../../utils/ErrorHandler";
-import {emailValidationCodeSent} from "../../utils/emailValidationCodeSent";
 import {createActivationToken} from "../../utils/generateActivationTokenCode";
+import sendMail from "../../utils/sendMail";
 import {iRegistrationBody} from "./type";
 import userModel from "./user.model";
 
@@ -23,7 +23,23 @@ export const register = CatchAsyncError(
             };
             const {token, activationCode} = createActivationToken(user);
             const data = {user: {name: user.name}, activationCode};
-            const html = await emailValidationCodeSent(data);
+
+            try {
+                await sendMail({
+                    email: user.email,
+                    subject: "Activation Your Account",
+                    template: "activation-mail.ejs",
+                    data,
+                });
+
+                res.status(201).json({
+                    success: true,
+                    message: `Please check your email ${user.email} to activate your account`,
+                    activationToken: token,
+                });
+            } catch (err: any) {
+                return next(new ErrorHandler(err.message, 400));
+            }
         } catch (error: any) {
             return next(new ErrorHandler(error.message, 400));
         }
