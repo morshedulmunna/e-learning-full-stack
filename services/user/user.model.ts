@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import mongoose, {Model, Schema} from "mongoose";
-import {iUser} from "./type.d";
+import {iUser} from "../../types/user.type";
 
 const emailRegexPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
