@@ -1,22 +1,8 @@
 import bcrypt from "bcryptjs";
-import mongoose, {Document, Model, Schema} from "mongoose";
+import mongoose, {Model, Schema} from "mongoose";
+import {iUser} from "../../types/user.type";
 
 const emailRegexPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-// user interface
-export interface iUser extends Document {
-    name: string;
-    email: string;
-    password: string;
-    avatar: {
-        public_id: string;
-        ur: string;
-    };
-    role: string;
-    isVerified: boolean;
-    courses: Array<{courseId: string}>;
-    comparePassword: (password: string) => Promise<boolean>;
-}
 
 // User Schema
 const userSchema: Schema<iUser> = new mongoose.Schema(
