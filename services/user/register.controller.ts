@@ -1,12 +1,12 @@
 import {NextFunction, Request, Response} from "express";
-import {CatchAsyncError} from "../../middleware/catchAsyncErrors";
+import {catchAsyncHandler} from "../../middleware/catchAsyncHandler";
 import ErrorHandler from "../../utils/ErrorHandler";
 import {createActivationToken} from "../../utils/generateActivationTokenCode";
 import sendMail from "../../utils/sendMail";
 import {iRegistrationBody} from "./type";
 import userModel from "./user.model";
 
-export const register = CatchAsyncError(
+export const register = catchAsyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
         try {
             const {name, email, password} = req.body;
