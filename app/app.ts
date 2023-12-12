@@ -1,5 +1,6 @@
 import express from "express";
-import {errorHandler, notFoundHandler} from "./globalError";
+import {ErrorMiddleware} from "../middleware/errors";
+import {notFoundHandler} from "./globalError";
 export const app = express();
 
 // middleWare
@@ -10,4 +11,4 @@ app.use(require("./globalRoutes"));
 
 //Default Global error MiddleWare
 app.use(notFoundHandler);
-app.use(errorHandler);
+app.use(ErrorMiddleware);
