@@ -37,5 +37,3 @@ export const activateUser = catchAsyncHandler(
         } catch (error) {}
     }
 );
-
-//TODO -> work here
