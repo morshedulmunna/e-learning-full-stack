@@ -16,7 +16,7 @@ export const activateUser = catchAsyncHandler(
                 process.env.JWT_SECRET as Secret
             ) as {user: iUser; activationCode: string};
 
-            if (newUser.activationCode === activation_code)
+            if (newUser.activationCode !== activation_code)
                 return next(new ErrorHandler("Invalid activation code", 400));
 
             const {name, email, password} = newUser.user;
@@ -24,7 +24,7 @@ export const activateUser = catchAsyncHandler(
             if (existUser)
                 return next(new ErrorHandler("Already exist user", 404));
 
-            const user = await userModel.create({
+            await userModel.create({
                 name,
                 email,
                 password,
