@@ -14,7 +14,7 @@ export const register = catchAsyncHandler(
             //check if the user already exists
             const isEmailExist = await userModel.findOne({email});
             if (isEmailExist)
-                next(new ErrorHandler("Email already exists", 400));
+                next(new ErrorHandler("Email already exists", 409));
 
             const user: iRegistrationBody = {
                 name,

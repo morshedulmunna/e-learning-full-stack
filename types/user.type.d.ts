@@ -12,6 +12,8 @@ export interface iUser extends Document {
     isVerified: boolean;
     courses: Array<{courseId: string}>;
     comparePassword: (password: string) => Promise<boolean>;
+    signAccessToken: () => string;
+    signRefreshToken: () => string;
 }
 
 export interface iRegistrationBody {
@@ -29,4 +31,9 @@ export interface iActivationToken {
 export interface iActivationRequest {
     activation_token: string;
     activation_code: string;
+}
+
+export interface iLoginRequest {
+    email: string;
+    password: string;
 }
