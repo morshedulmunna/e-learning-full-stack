@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import mongoose, {Model, Schema} from "mongoose";
 import {iUser} from "../../types/user.type";
 
@@ -59,8 +60,18 @@ userSchema.pre<iUser>("save", async function (next) {
 });
 
 //compare  password
-userSchema.methods.comparePassword = async function (enterPassword: string) {
-    return await this.password.compare(enterPassword, this.password);
+userSchema.methods.comparePassword = async function (
+    enterPassword: string
+): Promise<boolean> {
+    return await bcrypt.compare(enterPassword, this.password);
+};
+
+userSchema.methods.signAccessToken = function () {
+    return jwt.sign({id: this._id}, process.env.ACCESS_TOKEN || "");
+};
+
+userSchema.methods.signRefreshToken = function () {
+    return jwt.sign({id: this._id}, process.env.REFRESH_TOKEN || "");
 };
 
 const userModel: Model<iUser> = mongoose.model("User", userSchema);
