@@ -23,3 +23,16 @@ export const isAuthenticated = catchAsyncHandler(
         next();
     }
 );
+
+// Export authorization roles
+export const authorizeRoles = (...roles: string[]) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+        if (!roles.includes(req.user?.role || "")) {
+            return next(
+                new ErrorHandler(`Role ${req.user?.role} not allowed`, 403)
+            );
+        }
+
+        next();
+    };
+};
