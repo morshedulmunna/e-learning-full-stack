@@ -1,15 +1,17 @@
 import {NextFunction, Request, Response} from "express";
 import jwt, {Secret} from "jsonwebtoken";
 import {catchAsyncHandler} from "../../middleware/catchAsyncHandler";
-import {iActivationRequest, iUser} from "../../types/user.type";
+import {iActivationRequest, iUser} from "../../types/auth.type";
 import ErrorHandler from "../../utils/ErrorHandler";
 import userModel from "./user.model";
 
 export const activateUser = catchAsyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
         try {
+            // get activation code from body
             const {activation_code} = req.body as iActivationRequest;
 
+            // get verification code from cookie
             const verification_token = req.cookies.verification_token;
 
             const newUser: {user: iUser; activationCode: string} = jwt.verify(

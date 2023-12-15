@@ -1,7 +1,7 @@
 import {Response} from "express";
 import {redis} from "../config/redis.config";
+import {iUser} from "../types/auth.type";
 import {iTokenOption} from "../types/jwt.type";
-import {iUser} from "../types/user.type";
 
 // Parse environment variables to integer with fallback values
 const accessTokenExpire = parseInt(

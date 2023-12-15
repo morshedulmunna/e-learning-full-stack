@@ -37,3 +37,9 @@ export interface iLoginRequest {
     email: string;
     password: string;
 }
+
+export interface iSocialAuthBody {
+    email: string;
+    name: string;
+    avatar: string;
+}
