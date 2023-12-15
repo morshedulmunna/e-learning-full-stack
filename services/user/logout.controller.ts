@@ -1,12 +1,14 @@
 import {NextFunction, Request, Response} from "express";
+import {redis} from "../../config/redis.config";
 import {catchAsyncHandler} from "../../middleware/catchAsyncHandler";
 import ErrorHandler from "../../utils/ErrorHandler";
 
 export const logout = catchAsyncHandler(
-    async (_req: Request, res: Response, next: NextFunction) => {
+    async (req: Request, res: Response, next: NextFunction) => {
         try {
             res.clearCookie("access_token");
             res.clearCookie("refresh_token");
+            redis.del(req.user?._id);
 
             res.status(200).json({
                 success: true,
