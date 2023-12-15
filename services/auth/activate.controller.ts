@@ -8,11 +8,12 @@ import userModel from "./user.model";
 export const activateUser = catchAsyncHandler(
     async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const {activation_code, activation_token} =
-                req.body as iActivationRequest;
+            const {activation_code} = req.body as iActivationRequest;
+
+            const verification_token = req.cookies.verification_token;
 
             const newUser: {user: iUser; activationCode: string} = jwt.verify(
-                activation_token,
+                verification_token,
                 process.env.JWT_SECRET as Secret
             ) as {user: iUser; activationCode: string};
 

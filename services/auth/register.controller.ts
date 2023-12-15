@@ -32,10 +32,11 @@ export const register = catchAsyncHandler(
                     data,
                 });
 
+                res.cookie("verification_token", token);
+
                 res.status(201).json({
                     success: true,
                     message: `Please check your email ${user.email} to activate your account`,
-                    activationToken: token,
                 });
             } catch (err: any) {
                 return next(new ErrorHandler(err.message, 400));
