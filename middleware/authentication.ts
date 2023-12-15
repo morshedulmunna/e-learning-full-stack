@@ -11,7 +11,7 @@ export const isAuthenticated = catchAsyncHandler(
 
         const decoded = jwt.verify(
             access_token,
-            process.env.ACCESS_TOKEN as string
+            process.env.ACCESS_TOKEN_SECRET as string
         ) as JwtPayload;
         if (!decoded) next(new ErrorHandler("access denied", 403));
 

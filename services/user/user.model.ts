@@ -67,11 +67,11 @@ userSchema.methods.comparePassword = async function (
 };
 
 userSchema.methods.signAccessToken = function () {
-    return jwt.sign({id: this._id}, process.env.ACCESS_TOKEN || "");
+    return jwt.sign({id: this._id}, process.env.ACCESS_TOKEN_SECRET || "");
 };
 
 userSchema.methods.signRefreshToken = function () {
-    return jwt.sign({id: this._id}, process.env.REFRESH_TOKEN || "");
+    return jwt.sign({id: this._id}, process.env.REFRESH_TOKEN_SECRET || "");
 };
 
 const userModel: Model<iUser> = mongoose.model("User", userSchema);
