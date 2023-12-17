@@ -23,7 +23,6 @@ export const updateUser = async (user: iUpdateUser, userId: string) => {
         // set current user to redis instance
         await redis.set(userId, JSON.stringify(existUser));
 
-        // return updated user info
         return existUser;
     } catch (error: any) {
         throw new Error(error);
