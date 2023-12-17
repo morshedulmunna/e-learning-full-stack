@@ -23,7 +23,12 @@ export const updateUserInfo = catchAsyncHandler(
             const user = req.body as iUpdateUser;
             const userId = req.user?._id;
 
-            await updateUser(user, userId);
+            const user_info = await updateUser(user, userId);
+            res.status(200).json({
+                success: true,
+                message: "User info updated",
+                data: user_info,
+            });
         } catch (error: any) {
             return next(new ErrorHandler(error.message, 400));
         }
