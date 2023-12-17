@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import mongoose, {Model, Schema} from "mongoose";
-import {iUser} from "../../types/user.type";
+import {iUser} from "../../types/auth.type";
 
 const emailRegexPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

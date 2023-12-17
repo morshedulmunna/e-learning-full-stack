@@ -36,6 +36,8 @@ export const updateAccessToken = catchAsyncHandler(
                 }
             );
 
+            req.user = user;
+
             res.cookie("access_token", accessToken, accessTokenOptions);
             res.cookie("refresh_token", refreshToken, refreshTokenOptions);
 

@@ -1,5 +1,5 @@
 import jwt, {Secret} from "jsonwebtoken";
-import {iActivationToken, iRegistrationBody} from "../types/user.type";
+import {iActivationToken, iRegistrationBody} from "../types/auth.type";
 
 export const createActivationToken = (
     user: iRegistrationBody

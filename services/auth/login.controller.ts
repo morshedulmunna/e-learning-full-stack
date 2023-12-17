@@ -1,6 +1,6 @@
 import {NextFunction, Request, Response} from "express";
 import {catchAsyncHandler} from "../../middleware/catchAsyncHandler";
-import {iUser} from "../../types/user.type";
+import {iUser} from "../../types/auth.type";
 import ErrorHandler from "../../utils/ErrorHandler";
 import {sendToken} from "../../utils/jwt";
 import userModel from "./user.model";
