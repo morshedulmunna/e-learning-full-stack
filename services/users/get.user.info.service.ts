@@ -1,11 +1,15 @@
 import {Response} from "express";
-import userModel from "../auth/user.model";
+import {redis} from "../../config/redis.config";
 
 export const userInfo = async (id: string, res: Response) => {
-    const user = await userModel.findById(id);
+    const user = await redis.get(id);
 
-    res.status(200).json({
-        success: true,
-        user,
-    });
+    if (user) {
+        const userInfo = JSON.parse(user);
+        delete userInfo.password;
+        res.status(200).json({
+            success: true,
+            data: userInfo,
+        });
+    }
 };
